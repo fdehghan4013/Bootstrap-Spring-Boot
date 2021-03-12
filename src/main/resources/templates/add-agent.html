@@ -1,0 +1,25 @@
+<html xmlns:th="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <title>Home Page</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://getbootstrap.com/docs/4.0/examples/sign-in/signin.css">
+</head>
+<body class="text-center">
+<form class="form-signin" action="#" th:action="@{/addAgent}" th:object="${agent}" method="post">
+    <h1 class="h3 mb-3 font-weight-normal">Please fill the fields</h1>
+    <label for="firstName" class="sr-only">First name</label>
+    <input type="text" th:field="*{firstName}" id="firstName" class="form-control" placeholder="First name" required="" autofocus="">
+    <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></span>
+
+    <label for="lastName" class="sr-only">Last name</label>
+    <input type="text" th:field="*{lastName}" id="lastName" class="form-control" placeholder="Last name" required="">
+    <span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></span>
+    <br>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Save</button>
+</form>
+
+
+</body>
+
+</html>

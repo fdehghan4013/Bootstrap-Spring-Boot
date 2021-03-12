@@ -1,0 +1,49 @@
+<html xmlns:th="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <title>Home Page</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+<div class="container">
+    <h1>Hello !</h1>
+    <p>Welcome to <span th:text="${appName}">Our App</span></p>
+
+    <div th:switch="${agents}">
+        <h2 th:case="null">No Agents yet!</h2>
+        <div th:case="*">
+            <h2>Agents</h2>
+            <table class="table table-bordered table-hover">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Register Date</th>
+                    <th>Keys</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="agent : ${agents}">
+                    <td class="align-middle" th:text="${agent.id}"></td>
+                    <td class="align-middle" th:text="${agent.firstName}"></td>
+                    <td class="align-middle" th:text="${agent.lastName}"></td>
+                    <td class="align-middle" th:text="${agent.createdDate}"></td>
+                    <td th:if="${agent.keys.isEmpty()}">-</td>
+                    <td th:if="${!agent.keys.isEmpty()}" class="align-middle">
+                        <div th:each="key : ${agent.keys}" th:text="${key.value}"></div>
+                    </td>
+                    <td class="align-middle"><a class="btn btn-sm btn-primary" th:href="'/newKey/' + ${agent.id}">Generate a new key for this Agent</a></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <p><a class="btn btn-success" href="/newAgent">Add a new Agent</a></p>
+
+
+    </div>
+</div>
+</body>
+</html>
